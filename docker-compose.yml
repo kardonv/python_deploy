@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - db_data:/app/db.sqlite3
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=django-insecure-%lv@@p23$$^sow4oreocp(c90gyvxmn3u+clbwu8=mm_k4y7)wg
+      - ALLOWED_HOSTS=localhost,127.0.0.1
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --no-input &&
+             gunicorn config.wsgi:application --bind 0.0.0.0:8000 --reload"
+
+volumes:
+  db_data:
