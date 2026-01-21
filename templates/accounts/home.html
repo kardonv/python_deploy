@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Головна{% endblock %}
+
+{% block content %}
+<div class="welcome-section">
+    {% if user %}
+        <h1 class="welcome-title">Ласкаво просимо, {{ user.username }}!</h1>
+        <p class="welcome-subtitle">Ви успішно авторизовані в системі.</p>
+        <div class="btn-group">
+            <a href="{% url 'profile' %}" class="btn btn-primary">Мій профіль</a>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Вийти</a>
+        </div>
+    {% else %}
+        <h1 class="welcome-title">SimpleAuth</h1>
+        <p class="welcome-subtitle">Проста система авторизації на Django без стандартних класів</p>
+        <div class="btn-group">
+            <a href="{% url 'login' %}" class="btn btn-primary">Увійти</a>
+            <a href="{% url 'register' %}" class="btn btn-primary">Реєстрація</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

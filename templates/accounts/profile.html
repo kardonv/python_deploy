@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Профіль - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="profile-info">
+        <div class="profile-avatar">
+            {{ user.username|first|upper }}
+        </div>
+        <h2 class="profile-username">{{ user.username }}</h2>
+        <p class="profile-email">📧 {{ user.email }}</p>
+        <p class="profile-date">📅 Зареєстрований: {{ user.created_at|date:"d.m.Y H:i" }}</p>
+        
+        <a href="{% url 'logout' %}" class="btn btn-danger">Вийти з акаунту</a>
+    </div>
+</div>
+{% endblock %}
